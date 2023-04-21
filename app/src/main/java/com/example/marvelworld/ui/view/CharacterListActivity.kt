@@ -8,7 +8,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.marvelworld.core.RetrofitHelper
 import com.example.marvelworld.data.model.CharacterModel
-import com.example.marvelworld.data.model.CharacterProvider.Companion.characters
+
+import com.example.marvelworld.data.model.DataModel
+import com.example.marvelworld.data.model.ResultsModel
+
 import com.example.marvelworld.data.network.ApiClient
 import com.example.marvelworld.databinding.ActivityCharacterListBinding
 import com.example.marvelworld.ui.CharacterAdapter
@@ -20,8 +23,8 @@ import retrofit2.Retrofit
 
 class CharacterListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCharacterListBinding
-
     private lateinit var adapter: CharacterAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,18 +51,19 @@ class CharacterListActivity : AppCompatActivity() {
     }
 
     private fun searchByName(query: String) {
-            //binding.progressBar.isVisible = true
+           binding.progressBar.isVisible = true
             CoroutineScope(Dispatchers.IO).launch {
                 val retrofit = RetrofitHelper.getRetrofit()
-                val call: Response<CharacterModel> =
+                val call: Response<CharacterModel<DataModel>> =
                     retrofit.create(ApiClient::class.java).getCharacters(query)
-                val response: CharacterModel? = call.body()
                 if (call.isSuccessful) {
+                    val response: CharacterModel<DataModel>? = call.body()
                     Log.i("aristidevs", "funciona :)")
                     if (response != null) {
                         Log.i("aristidevs", response.toString())
                         runOnUiThread {
-                            adapter.updateList(response)
+                           // adapter.updateList(List)
+
                             binding.progressBar.isVisible = false
                         }
                     }

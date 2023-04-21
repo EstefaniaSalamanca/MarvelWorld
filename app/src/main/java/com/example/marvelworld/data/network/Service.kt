@@ -3,7 +3,7 @@ package com.example.marvelworld.data.network
 
 import androidx.room.util.query
 import com.example.marvelworld.core.RetrofitHelper
-import com.example.marvelworld.data.model.CharacterModel
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

@@ -4,16 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelworld.R
-import com.example.marvelworld.data.model.Results
+import com.example.marvelworld.data.model.DataModel
 
-class CharacterAdapter (
-    var characterList: List<Results> = emptyList()) :
+import com.example.marvelworld.data.model.ResultsModel
+
+class CharacterAdapter(
+    var characterList: List<ResultsModel> = emptyList()
+) :
     RecyclerView.Adapter<CharacterViewHolder>() {
 
-    fun updateList(characterList:List<Results>){
-        this.characterList=characterList
+    fun updateList(List: List<ResultsModel>) {
+        characterList = List
         notifyDataSetChanged()
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         return CharacterViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_character, parent, false)
@@ -26,6 +30,6 @@ class CharacterAdapter (
 
     override fun getItemCount() = characterList.size
 
-    }
+}
 
 
