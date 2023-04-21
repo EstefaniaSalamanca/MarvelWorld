@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.view.CharacterListActivity">
 
     <ProgressBar
@@ -17,6 +18,8 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.appcompat.widget.SearchView
+        android:background="#F35353"
+
         android:id="@+id/searchView"
         android:layout_width="0dp"
         app:layout_constraintStart_toStartOf="parent"

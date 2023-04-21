@@ -1,17 +1,16 @@
 package com.example.marvelworld.ui.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.marvelworld.CharacterDetailActivity
 import com.example.marvelworld.core.RetrofitHelper
 import com.example.marvelworld.data.model.CharacterModel
-
 import com.example.marvelworld.data.model.DataModel
-import com.example.marvelworld.data.model.ResultsModel
-
 import com.example.marvelworld.data.network.ApiClient
 import com.example.marvelworld.databinding.ActivityCharacterListBinding
 import com.example.marvelworld.ui.CharacterAdapter
@@ -19,7 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import retrofit2.Retrofit
+
 
 class CharacterListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCharacterListBinding
@@ -30,7 +29,6 @@ class CharacterListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCharacterListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        RetrofitHelper.getRetrofit()
         initUI()
     }
 
@@ -44,7 +42,7 @@ class CharacterListActivity : AppCompatActivity() {
         override fun onQueryTextChange(newText: String?) = false
     })
 
-        adapter = CharacterAdapter (  )
+        adapter = CharacterAdapter ()//{ characterId -> navigateToDetail(characterId) })
         binding.rvCharacter.setHasFixedSize(true)
         binding.rvCharacter.layoutManager = LinearLayoutManager(this)
         binding.rvCharacter.adapter = adapter
@@ -62,7 +60,7 @@ class CharacterListActivity : AppCompatActivity() {
                     if (response != null) {
                         Log.i("aristidevs", response.toString())
                         runOnUiThread {
-                           // adapter.updateList(List)
+                            response.data?.let { adapter.updateList(it.results) }
 
                             binding.progressBar.isVisible = false
                         }
@@ -73,4 +71,13 @@ class CharacterListActivity : AppCompatActivity() {
             }
         }
 
+    private fun navigateToDetail(characterId: Int) {
+      val intent = Intent(this, CharacterDetailActivity::class.java)
+        intent.putExtra(EXTRA_ID, id)
+        startActivity(intent)
+
     }
+
+
+}
+

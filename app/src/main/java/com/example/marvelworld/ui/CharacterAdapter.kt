@@ -9,7 +9,7 @@ import com.example.marvelworld.data.model.DataModel
 import com.example.marvelworld.data.model.ResultsModel
 
 class CharacterAdapter(
-    var characterList: List<ResultsModel> = emptyList()
+    var characterList: List<ResultsModel> = emptyList()//,  private val onItemSelected: (String) -> Unit
 ) :
     RecyclerView.Adapter<CharacterViewHolder>() {
 
@@ -25,7 +25,7 @@ class CharacterAdapter(
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        holder.bind(characterList[position])
+        holder.bind(characterList[position], )//onItemSelected)
     }
 
     override fun getItemCount() = characterList.size
