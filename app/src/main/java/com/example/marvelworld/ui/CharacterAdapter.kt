@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.marvelworld.R
-import com.example.marvelworld.data.model.DataModel
 
 import com.example.marvelworld.data.model.ResultsModel
 
 class CharacterAdapter(
-    var characterList: List<ResultsModel> = emptyList()//,  private val onItemSelected: (String) -> Unit
+    var characterList: List<ResultsModel> = emptyList(),  private val onItemSelected: (Int) -> Unit
 ) :
     RecyclerView.Adapter<CharacterViewHolder>() {
 
@@ -25,7 +24,7 @@ class CharacterAdapter(
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        holder.bind(characterList[position], )//onItemSelected)
+        holder.bind(characterList[position] , onItemSelected)
     }
 
     override fun getItemCount() = characterList.size

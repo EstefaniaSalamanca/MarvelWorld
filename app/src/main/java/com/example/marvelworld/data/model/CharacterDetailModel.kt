@@ -14,9 +14,9 @@ data class DataDetailModel(
 
 data class ResultDetailModel(
     @SerializedName("description") val description: String,
-    @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("thumbnail") val thumbnail: Thumbnail,
+    @SerializedName("id") val characterId: Int,
+    @SerializedName("name") val characterName: String,
+    @SerializedName("thumbnail") val image: Thumbnail,
 
 )
 
